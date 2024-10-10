@@ -6,6 +6,7 @@ load_dotenv()
 def respond(message, chat_history):
     
     answer = "test jawab dari: " + message
+    chat_history.append(("User", message))
     chat_history.append(("Bot", answer))
 
     return chat_history, ""
