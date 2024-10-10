@@ -9,6 +9,6 @@ curl "{{baseurl}}/question" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -d '{
-    "question": "kamu siapa"
+    "question": "siapa presiden indonesia sekarang"
 }'
 

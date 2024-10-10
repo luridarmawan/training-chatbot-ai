@@ -20,8 +20,18 @@ load_dotenv()
 class QuestionPayloadModel(BaseModel):
     question: str
 
+messages = [
+    ("system", "kamu adalah asisten AI pintar.")
+]
+
 model="gemini-1.5-flash"
 llm = ChatGoogleGenerativeAI( model=model)
+
+def Answer(question: str):
+    messages.append(("human", question))
+    result = llm.invoke(messages)
+    messages.append(("ai", result.content))
+    return result
 
 app = FastAPI()
 
@@ -32,12 +42,9 @@ async def root():
 # http://localhost:5000/question
 @app.post("/question")
 def Question(payload:QuestionPayloadModel):
-    print(payload)
-
-    #TODO: tanya ke LLM
-
-    answer = "ini jawaban"
-    return {"code":0, "answer": answer, "request": payload, "response": { "answer": answer}}
+    result = Answer(payload.question)
+    answer = result.content
+    return {"code":0, "answer": answer, "request": payload, "response": result}
 
 if __name__ == "__main__":
     PORT = os.getenv("API_PORT", 8088)
