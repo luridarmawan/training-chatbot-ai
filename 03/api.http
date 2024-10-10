@@ -1,0 +1,14 @@
+
+@baseurl=http://127.0.0.1:5000
+#@baseurl="https://api.xxxxxxx.com/v1"
+
+curl "{{baseurl}}/"
+
+### Question
+curl "{{baseurl}}/question" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -d '{
+    "question": "kamu siapa"
+}'
+
