@@ -1,0 +1,8 @@
+langchain
+langchain_community
+langchain_openai
+langchain_google_genai
+accelerate
+transformers
+langchain_chroma
+faiss-cpu
