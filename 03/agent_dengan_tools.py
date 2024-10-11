@@ -40,7 +40,20 @@ def get_exchange_rate(query: str) -> str:
     rateFrom, rateTo = query.split(",")
     current_rate = random.randint(100, 5000)
     # current_rate = 15213 # dummy value
-    text = f"Rate from {rateFrom} to {rateTo} is {current_rate}"
+
+    from langchain_community.utilities import RequestsWrapper
+    from langchain_community.tools import RequestsGetTool, RequestsPostTool
+
+    requests_wrapper = RequestsWrapper()
+    kurs_tool = RequestsGetTool(requests_wrapper=requests_wrapper, allow_dangerous_requests=True)
+    kurs = kurs_tool.run("https://api.exchangerate-api.com/v4/latest/USD")
+
+    text = f"""
+    Berikut informasi kurs yang tersedia dalam bentuk json:
+    {kurs}
+    """
+
+    # text = f"Rate from {rateFrom} to {rateTo} is {current_rate}"
     return text
 
 def tool_search_pasal_only(string):

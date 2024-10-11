@@ -34,6 +34,9 @@ with gr.Blocks() as demo:
             )
         with gr.Column():
             send_button = gr.Button("Kirim")
+        
+    with gr.Row():
+        gr.File(file_count="multiple")
 
     send_button.click(respond, 
         inputs=[message_box, chatbot],
